@@ -1,4 +1,4 @@
-# Membuat select2 pagination dengan codeignter 3
+# Membuat select2 pagination
 
 tambahkan select2 (buka situs resminya)
 
@@ -9,7 +9,7 @@ tambahkan select2 (buka situs resminya)
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 ```
 
-file Controller (Codeigniter)
+file Controller (Codeigniter 3)
 ```php
   public function get_data_barang()
   {
