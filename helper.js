@@ -570,8 +570,8 @@ function timeAgo(datetime, full = false) {
 /**
  * fungsi untuk membuat slug
  *
- * @param string text
- * @returns string
+ * @param {string} text
+ * @returns {string}
  */
 function slugify(text) {
   return text
@@ -583,4 +583,4 @@ function slugify(text) {
 }
 
 // example
-console.log(slugify('Halo selamat Datang Gian '));
+// console.log(slugify('Halo selamat Datang Gian '));
