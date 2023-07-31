@@ -218,7 +218,7 @@ function number_to_romawi(int $integer)
  * @param boolean $time
  * @return string
  */
-function waktu_indo($format, $time = false)
+function date_indo($format, $time = false)
 {
     $day    = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
     $days   = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
