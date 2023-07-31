@@ -3,71 +3,69 @@
 1. Masukkan Style dibawah ini:
 
 ```css
-  <style>
-    #cover-spin {
-      cursor: not-allowed;
-      position: fixed;
-      width: 100%;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      background-color: rgba(255, 255, 255, 0.7);
-      z-index: 9999;
-      display: none;
-    }
+#cover-spin {
+  cursor: not-allowed;
+  position: fixed;
+  width: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.7);
+  z-index: 9999;
+  display: none;
+}
 
-    @-webkit-keyframes spin {
-      from {
-        -webkit-transform: rotate(0deg);
-      }
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
 
-      to {
-        -webkit-transform: rotate(360deg);
-      }
-    }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
 
-    @keyframes spin {
-      from {
-        transform: rotate(0deg);
-      }
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
 
-      to {
-        transform: rotate(360deg);
-      }
-    }
+  to {
+    transform: rotate(360deg);
+  }
+}
 
-    #loading {
-      display: none;
-      width: 20px;
-      height: 20px;
-      margin-bottom: 10px;
-      border-style: solid;
-      border-color: black;
-      border-top-color: transparent;
-      border-width: 3px;
-      border-radius: 50%;
-      -webkit-animation: spin 0.8s linear infinite;
-      animation: spin 0.8s linear infinite;
-    }
+#loading {
+  display: none;
+  width: 20px;
+  height: 20px;
+  margin-bottom: 10px;
+  border-style: solid;
+  border-color: black;
+  border-top-color: transparent;
+  border-width: 3px;
+  border-radius: 50%;
+  -webkit-animation: spin 0.8s linear infinite;
+  animation: spin 0.8s linear infinite;
+}
 
-    #cover-spin::after {
-      content: '';
-      display: block;
-      position: absolute;
-      left: 48%;
-      top: 40%;
-      width: 40px;
-      height: 40px;
-      border-style: solid;
-      border-color: black;
-      border-top-color: transparent;
-      border-width: 5px;
-      border-radius: 50%;
-      -webkit-animation: spin 0.8s linear infinite;
-      animation: spin 0.8s linear infinite;
-    }
-  </style>
+#cover-spin::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 48%;
+  top: 40%;
+  width: 40px;
+  height: 40px;
+  border-style: solid;
+  border-color: black;
+  border-top-color: transparent;
+  border-width: 5px;
+  border-radius: 50%;
+  -webkit-animation: spin 0.8s linear infinite;
+  animation: spin 0.8s linear infinite;
+}
 ```
 
 2. Tambahkan element html
