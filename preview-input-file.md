@@ -2,6 +2,71 @@
 
 Berikut merupakan preview gambar input file ketika diupload
 
+gambaran function umum dengan FileReader dan URL.createObjectURL
+
+```js
+var fileInput = document.getElementById('file-input');
+var previewImage1 = document.getElementById('preview-image1');
+var previewImage2 = document.getElementById('preview-image2');
+
+fileInput.addEventListener('change', function() {
+    previewWithObjectURL(fileInput, previewImage1);
+    previewWithObjectURL2(fileInput, previewImage1);
+    previewWithFileReader(fileInput, previewImage2);
+});
+
+function previewWithObjectURL(inputElement, previewElement) {
+    if (inputElement.files && inputElement.files[0]) {
+        var file = inputElement.files[0];
+        previewElement.src = URL.createObjectURL(file);
+        previewElement.style.display = 'block';
+    } else {
+        previewElement.style.display = 'none';
+        previewElement.src = '';
+    }
+}
+
+function previewWithObjectURL2(inputElement, previewElement) {
+    if (inputElement.files && inputElement.files[0]) {
+        var file = inputElement.files[0];
+        var objectURL = URL.createObjectURL(file);
+        
+        previewElement.src = objectURL;
+        previewElement.style.display = 'block';
+
+        // Melepaskan URL objek setelah digunakan
+        previewElement.onload = function() {
+            URL.revokeObjectURL(objectURL);
+        };
+    } else {
+        previewElement.style.display = 'none';
+        previewElement.src = '';
+    }
+}
+
+function previewWithFileReader(inputElement, previewElement) {
+    if (inputElement.files && inputElement.files[0]) {
+        var file = inputElement.files[0];
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            previewElement.src = e.target.result;
+            previewElement.style.display = 'block';
+        };
+
+        reader.readAsDataURL(file);
+    } else {
+        previewElement.style.display = 'none';
+        previewElement.src = '';
+    }
+}
+
+```
+
+<hr>
+
+
+
 ```html
 <!DOCTYPE html>
 <html>
@@ -27,6 +92,8 @@ Berikut merupakan preview gambar input file ketika diupload
 </body>
 </html>
 ```
+
+### Dengan FIleReader
 
 Dengan Javascript
 
@@ -128,3 +195,128 @@ $(document).ready(function() {
 });
 ```
 
+### Dengan URL.createObjectURL
+
+javascript 
+
+```js
+document.addEventListener('DOMContentLoaded', function() {
+    var fileInput = document.getElementById('file-input');
+    var previewImage = document.getElementById('preview-image');
+    var currentObjectURL = null;
+
+    fileInput.addEventListener('change', function() {
+        var file = fileInput.files[0];
+
+        if (file) {
+            if (currentObjectURL) {
+                URL.revokeObjectURL(currentObjectURL); // Bebaskan URL objek sebelumnya
+            }
+            currentObjectURL = URL.createObjectURL(file);
+
+            previewImage.src = currentObjectURL;
+            previewImage.style.display = 'block';
+        } else {
+            previewImage.style.display = 'none';
+            previewImage.src = '';
+        }
+    });
+});
+```
+
+Javascript (dengan function terpisah)
+
+```js
+document.addEventListener('DOMContentLoaded', function() {
+    var fileInput = document.getElementById('file-input');
+    var previewImage = document.getElementById('preview-image');
+    var currentObjectURL = null;
+
+    function createPreview(file) {
+        if (currentObjectURL) {
+            URL.revokeObjectURL(currentObjectURL); // Bebaskan URL objek sebelumnya
+        }
+        currentObjectURL = URL.createObjectURL(file);
+
+        previewImage.src = currentObjectURL;
+        previewImage.style.display = 'block';
+    }
+
+    function clearPreview() {
+        if (currentObjectURL) {
+            URL.revokeObjectURL(currentObjectURL); // Bebaskan URL objek sebelumnya
+        }
+        previewImage.style.display = 'none';
+        previewImage.src = '';
+    }
+
+    fileInput.addEventListener('change', function() {
+        var file = fileInput.files[0];
+
+        if (file) {
+            createPreview(file);
+        } else {
+            clearPreview();
+        }
+    });
+});
+
+```
+
+JQuery
+
+```js
+$(document).ready(function() {
+    var fileInput = $('#file-input');
+    var previewImage = $('#preview-image');
+
+    fileInput.change(function() {
+        var file = fileInput[0].files[0];
+
+        if (file) {
+            if (previewImage.attr('src')) {
+                URL.revokeObjectURL(previewImage.attr('src')); // Bebaskan URL objek sebelumnya
+            }
+            previewImage.attr('src', URL.createObjectURL(file)).css('display', 'block');
+        } else {
+            previewImage.css('display', 'none').attr('src', '');
+        }
+    });
+});
+```
+
+JQuery (dengan function terpisah)
+
+```js
+$(document).ready(function() {
+    var fileInput = $('#file-input');
+    var previewImage = $('#preview-image');
+    var currentObjectURL = null;
+
+    function createPreview(file) {
+        if (currentObjectURL) {
+            URL.revokeObjectURL(currentObjectURL); // Bebaskan URL objek sebelumnya
+        }
+        currentObjectURL = URL.createObjectURL(file);
+
+        previewImage.attr('src', currentObjectURL).css('display', 'block');
+    }
+
+    function clearPreview() {
+        if (currentObjectURL) {
+            URL.revokeObjectURL(currentObjectURL); // Bebaskan URL objek sebelumnya
+        }
+        previewImage.css('display', 'none').attr('src', '');
+    }
+
+    fileInput.change(function() {
+        var file = fileInput[0].files[0];
+
+        if (file) {
+            createPreview(file);
+        } else {
+            clearPreview();
+        }
+    });
+});
+```
