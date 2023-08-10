@@ -2,7 +2,7 @@
 
 Berikut merupakan preview gambar input file ketika diupload
 
-gambaran function umum dengan FileReader dan URL.createObjectURL
+## gambaran function umum dengan FileReader dan URL.createObjectURL
 
 ```js
 var fileInput = document.getElementById('file-input');
@@ -65,7 +65,7 @@ function previewWithFileReader(inputElement, previewElement) {
 
 <hr>
 
-
+## Dengan Studi kasus
 
 ```html
 <!DOCTYPE html>
