@@ -1,8 +1,6 @@
 # PREVIEW INPUT FILE DENGAN JQUERY/JAVASCRIPT
 
-Berikut merupakan preview gambar input file ketika diupload
-
-## gambaran function umum dengan FileReader dan URL.createObjectURL
+## 1. Gambaran function umum dengan FileReader dan URL.createObjectURL
 
 ```js
 var fileInput = document.getElementById('file-input');
@@ -65,7 +63,9 @@ function previewWithFileReader(inputElement, previewElement) {
 
 <hr>
 
-## Dengan Studi kasus
+## 2. Dengan Studi kasus
+
+html
 
 ```html
 <!DOCTYPE html>
@@ -93,7 +93,7 @@ function previewWithFileReader(inputElement, previewElement) {
 </html>
 ```
 
-### Dengan FIleReader
+### 2.1 Dengan FIleReader
 
 Dengan Javascript
 
@@ -195,7 +195,7 @@ $(document).ready(function() {
 });
 ```
 
-### Dengan URL.createObjectURL
+### 2.2 Dengan URL.createObjectURL
 
 javascript 
 
