@@ -3,12 +3,12 @@
 /**
  * fungsi untuk membatasi limit karakter
  *
- * @param [type] $content
- * @param integer $length panjang kata
+ * @param string $content
+ * @param int $length panjang kata
  * @param string $more pemisah
  * @return string
  */
-function force_excerpt($content, $length = 40, $more = '...')
+function forceExcerpt($content, $length = 40, $more = '...')
 {
     $excerpt = strip_tags(trim($content));
     $words   = str_word_count($excerpt, 2);
@@ -28,7 +28,7 @@ function force_excerpt($content, $length = 40, $more = '...')
  * @param	int	number of characters
  * @return	string
  */
-function random_string($type = 'alnum', $len = 8)
+function randomString($type = 'alnum', $len = 8)
 {
     switch ($type) {
         case 'basic':
@@ -60,14 +60,14 @@ function random_string($type = 'alnum', $len = 8)
 }
 
 /**
- * sample function untuk get data url
+ * sample function untuk get data denngan curl
  *
- * @param [type] $id_hash
- * @param [type] $judul
- * @param [type] $message
- * @return void
+ * @param string $id_hash
+ * @param string $judul
+ * @param string $message
+ * @return string JSON-encoded
  */
-function send_notifikasi_pengunjung($id_hash, $judul, $message)
+function sendNotifikasiPengunjung(string $id_hash, string $judul,  string $message)
 {
     $useragent = "Mozilla/5.0 (Windows NT 5.1; rv:31.0) Gecko/20100101 Firefox/31.0";
     $url       = 'http://localhost';
@@ -95,7 +95,7 @@ function send_notifikasi_pengunjung($id_hash, $judul, $message)
  *
  * @return DateTime
  */
-function current_timestamp()
+function timestamp()
 {
     return date("Y-m-d H:i:s");
 }
@@ -104,9 +104,9 @@ function current_timestamp()
  * fungsi untuk mengembalikan response json
  *
  * @param array $response
- * @param integer $status_code
+ * @param int $status_code
  * @param string $content_type
- * @return string json
+ * @return string JSON-encoded
  */
 function response_json($response = [], $status_code = 200)
 {
@@ -118,10 +118,10 @@ function response_json($response = [], $status_code = 200)
 /**
  * fungsi untuk format angka
  *
- * @param integer $angka
- * @return integer
+ * @param int $angka
+ * @return int
  */
-function format_angka(int $angka = 0)
+function formatAngka(int $angka = 0)
 {
     return number_format($angka, 0, ',', '.');
 }
@@ -133,7 +133,7 @@ function format_angka(int $angka = 0)
  * @param string|DateTime $time
  * @return string
  */
-function time_ago($datetime, $full = false)
+function timeAgo($datetime, $full = false)
 {
     $now  = new DateTime;
     $then = new DateTime($datetime);
@@ -172,9 +172,9 @@ function time_ago($datetime, $full = false)
  * contoh: V = 5
  *
  * @param string $romawi
- * @return string
+ * @return int
  */
-function romawi_to_number(string $romawi)
+function romawiToNumber(string $romawi): int
 {
     $table  = ['M' => 1000, 'CM' => 900, 'D' => 500, 'CD' => 400, 'C' => 100, 'XC' => 90, 'L' => 50, 'XL' => 40, 'X' => 10, 'IX' => 9, 'V' => 5, 'IV' => 4, 'I' => 1];
     $result = 0;
@@ -191,17 +191,17 @@ function romawi_to_number(string $romawi)
  * fungis untuk konversi angka menjadi romawi
  * contoh: 5 = V
  *
- * @param integer $integer
+ * @param int $int
  * @return string
  */
-function number_to_romawi(int $integer)
+function numberToRomawi(int $int): string
 {
     $table  = ['M' => 1000, 'CM' => 900, 'D' => 500, 'CD' => 400, 'C' => 100, 'XC' => 90, 'L' => 50, 'XL' => 40, 'X' => 10, 'IX' => 9, 'V' => 5, 'IV' => 4, 'I' => 1];
     $return = '';
-    while ($integer > 0) {
+    while ($int > 0) {
         foreach ($table as $rom => $arb) {
-            if ($integer >= $arb) {
-                $integer -= $arb;
+            if ($int >= $arb) {
+                $int -= $arb;
                 $return  .= $rom;
                 break;
             }
@@ -218,7 +218,7 @@ function number_to_romawi(int $integer)
  * @param boolean $time
  * @return string
  */
-function date_indo($format, $time = false)
+function dateIndo($format, $time = false)
 {
     $day    = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
     $days   = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
@@ -274,9 +274,9 @@ function date_indo($format, $time = false)
  * @param string $method GET, POST, PUT, PATCH, DELETE
  * @param array $data
  * @param array $headers
- * @return json
+ * @return string JSON-encoded
  */
-function fetch_curl($url, $method = 'GET', $data = null, $headers = array())
+function fetchCURL($url, $method = 'GET', $data = null, $headers = array())
 {
     $curl = curl_init();
 
@@ -324,11 +324,11 @@ function fetch_curl($url, $method = 'GET', $data = null, $headers = array())
 /**
  * helper untuk format angka showrt
  *
- * @param [type] $n
- * @param integer $precision
- * @return void
+ * @param int $n
+ * @param int $precision
+ * @return string
  */
-function number_format_short($n, $precision = 1)
+function numberFormatShort($n, $precision = 1)
 {
     if ($n < 900) {
         // 0 - 900
@@ -369,7 +369,7 @@ function number_format_short($n, $precision = 1)
  * @param string|DateTime $end_date
  * @return array
  */
-function get_range_date($start_date, $end_date)
+function getRangeDate($start_date, $end_date)
 {
     $list_range_date = [];
 
@@ -389,11 +389,11 @@ function get_range_date($start_date, $end_date)
 /**
  * fungsi untuk generate invoice sederhana
  *
- * @param integer $length panjang karater acak terakhir
+ * @param int $length panjang karater acak terakhir
  * @param string $prefix awalan invoice
  * @return string
  */
-function generate_invoice($length = 5, $prefix = 'INV')
+function generateInvoice($length = 5, $prefix = 'INV')
 {
     $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $characters_length = strlen($characters);
@@ -413,7 +413,7 @@ function generate_invoice($length = 5, $prefix = 'INV')
  * @param string $text
  * @return string
  */
-function slugify($text)
+function slugify($text): string
 {
     $string = preg_replace('/[^a-zA-Z0-9\s]/', '', $text);
     $string = str_replace(' ', '-', $string);
