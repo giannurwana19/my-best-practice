@@ -16,11 +16,33 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 $spreadsheet = new Spreadsheet();
 $sheet = $spreadsheet->getActiveSheet();
 
+$sheet->getParent()
+    ->getDefaultStyle()
+    ->getFont()
+    ->setName('Arial Narrow');
+
 $sheet->setCellValue('A1', 'Hello world');
 
 // gabung cell
 $sheet->mergeCells('A2:C2');
 $sheet->getStyle('A2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+
+$sheet->mergeCells('A3:A4');
+$sheet->getStyle('A3')->getAlignment()
+    ->setVertical(Alignment::VERTICAL_CENTER)
+    ->setHorizontal(Alignment::HORIZONTAL_CENTER);
+$sheet->getStyle('A3')->getFont()
+    ->setSize(12)
+    ->setBold(true);
+
+$sheet->mergeCells('B3:C3');
+$sheet->getStyle('B3')->getAlignment()
+    ->setHorizontal(Alignment::HORIZONTAL_CENTER)
+    ->setVertical(Alignment::VERTICAL_CENTER);
+$sheet->getStyle('B3')->getFont()
+    ->setSize(12)
+    ->setBold(true);
+$sheet->setCellValue('B3', 'Identitas Siswa');
 
 $style = $sheet->getStyle('A2');
 $font = $style->getFont();
@@ -31,17 +53,17 @@ $sheet->setCellValue('A2', 'Daftar Nama Siswa');
 // mengatu tinggi cell pada baris ke 3
 $sheet->getRowDimension(3)->setRowHeight(30);
 
-$style = $sheet->getStyle('A3:C3');
+$sheet->setCellValue('A3', 'Nama');
+$sheet->setCellValue('B4', 'Usia');
+$sheet->setCellValue('C4', 'Alamat');
+
+$style = $sheet->getStyle('A4:C4');
 $style->getAlignment()
     ->setHorizontal(Alignment::HORIZONTAL_CENTER)
     ->setVertical(Alignment::VERTICAL_CENTER);
 $font = $style->getFont();
 $font->setSize(12); // Ukuran font 14 poin
 $font->setBold(true); // Mengatur gaya tebal (bold)
-
-$sheet->setCellValue('A3', 'Nama');
-$sheet->setCellValue('B3', 'Usia');
-$sheet->setCellValue('C3', 'Alamat');
 
 $styleArray = [
     'borders' => [
@@ -60,7 +82,7 @@ for ($i = 0; $i < 10; $i++) {
     $data[] = $sampleData;
 }
 
-$row = 4; // Mulai dari baris ke-2
+$row = 5; // Mulai dari baris ke-2
 foreach ($data as $item) {
     $sheet->setCellValue('A' . $row, $item->nama);
     $sheet->setCellValueExplicit('B' . $row, $item->usia, DataType::TYPE_NUMERIC);
@@ -97,7 +119,7 @@ $sheet->getColumnDimension('B')->setWidth(10);
 $sheet->getColumnDimension('C')->setAutoSize(true);
 
 $writer = new Xlsx($spreadsheet);
-$writer->save('hasil/dasar2.xlsx');
+$writer->save('hasil/dasar3.xlsx');
 ```
 
 Hasil:
