@@ -584,3 +584,117 @@ function slugify(text) {
 
 // example
 // console.log(slugify('Halo selamat Datang Gian '));
+
+/**
+ *
+ * @param {string} format
+ * @param {*} time
+ * @returns
+ */
+function dateIndo(format, time) {
+  const days = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
+  const daysFull = [
+    'Minggu',
+    'Senin',
+    'Selasa',
+    'Rabu',
+    'Kamis',
+    'Jumat',
+    'Sabtu',
+  ];
+  const months = [
+    '',
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'Mei',
+    'Jun',
+    'Jul',
+    'Agu',
+    'Sep',
+    'Okt',
+    'Nov',
+    'Des',
+  ];
+  const monthsFull = [
+    '',
+    'Januari',
+    'Februari',
+    'Maret',
+    'April',
+    'Mei',
+    'Juni',
+    'Juli',
+    'Agustus',
+    'September',
+    'Oktober',
+    'November',
+    'Desember',
+  ];
+
+  if (!time) {
+    time = new Date();
+  }
+
+  if (typeof time === 'string') {
+    try {
+      time = new Date(time);
+    } catch (e) {
+      time = new Date();
+    }
+  }
+
+  let ret = '';
+  for (let i = 0; i < format.length; i++) {
+    if (format[i] === '\\') {
+      ret += format[++i] || '';
+    } else {
+      switch (format[i]) {
+        case 'D':
+          ret += days[time.getUTCDay()];
+          break;
+        case 'l':
+          ret += daysFull[time.getUTCDay()];
+          break;
+        case 'M':
+          ret += months[time.getUTCMonth()];
+          break;
+        case 'F':
+          ret += monthsFull[time.getUTCMonth()];
+          break;
+        case 'd':
+          ret += ('0' + time.getUTCDate()).slice(-2);
+          break;
+        case 'm':
+          ret += ('0' + (time.getUTCMonth() + 1)).slice(-2);
+          break;
+        case 'Y':
+          ret += time.getUTCFullYear();
+          break;
+        case 'H':
+          ret += ('0' + time.getUTCHours()).slice(-2);
+          break;
+        case 'i':
+          ret += ('0' + time.getUTCMinutes()).slice(-2);
+          break;
+        case 's':
+          ret += ('0' + time.getUTCSeconds()).slice(-2);
+          break;
+        case '\\':
+          ret += format[i + 1] || '';
+          i++;
+          break;
+        default:
+          ret += format[i];
+          break;
+      }
+    }
+  }
+
+  return ret;
+}
+
+const date = new Date(); // Tanggal dan waktu saat ini
+const formattedDate = dateIndo('d-M-Y H:i:s', date);
+console.log(formattedDate); // Contoh output: "Senin, 26 September 2023"
