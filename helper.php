@@ -423,3 +423,81 @@ function slugify($text): string
 
     return $string;
 }
+
+/**
+ * set response status code untuk php 5.3
+ *
+ * @param [type] $statusCode
+ * @return void
+ */
+function setHttpResponseStatusCode($statusCode)
+{
+    $statusCodes = array(
+        200 => 'OK',
+        201 => 'Created',
+        400 => 'Bad Request',
+        401 => 'Unauthorized',
+        403 => 'Forbidden',
+        404 => 'Not Found',
+        500 => 'Internal Server Error'
+    );
+
+    if (array_key_exists($statusCode, $statusCodes)) {
+        header("HTTP/1.1 $statusCode " . $statusCodes[$statusCode]);
+    } else {
+        // Jika status code tidak valid, gunakan status code 500
+        header("HTTP/1.1 500 Internal Server Error");
+    }
+}
+
+/**
+ * Codeigniter 3
+ * mengambil input post dengan htmlspecialchars
+ *
+ * @param string $keys
+ * 
+ */
+function request_post($keys = null)
+{
+    $CI = &get_instance();
+
+    $post_data = $CI->input->post(null, true);
+
+    if ($keys == null) {
+        foreach ($post_data as $key => $value) {
+            $post_data[$key] = htmlspecialchars($value);
+        }
+    } else {
+        if (isset($post_data[$keys])) {
+            $post_data[$keys] = htmlspecialchars($post_data[$keys]);
+        }
+    }
+
+    return $post_data;
+}
+
+/**
+ * Codeigniter 3
+ * mengambil input get dengan htmlspecialchars
+ *
+ * @param string $keys
+ * 
+ */
+function request_get($keys = null)
+{
+    $CI = &get_instance();
+
+    $post_data = $CI->input->get(null, true);
+
+    if ($keys == null) {
+        foreach ($post_data as $key => $value) {
+            $post_data[$key] = htmlspecialchars($value);
+        }
+    } else {
+        if (isset($post_data[$keys])) {
+            $post_data[$keys] = htmlspecialchars($post_data[$keys]);
+        }
+    }
+
+    return $post_data;
+}
