@@ -501,3 +501,26 @@ function request_get($keys = null)
 
     return $post_data;
 }
+
+/**
+ * return 1 data filtered array data
+ *
+ * @param array $listData
+ * @param array $where ['key' => 'value']
+ * @return void
+ */
+function filterArray(array $listData, array $where)
+{
+    $key = array_key_first($where);
+    $value = reset($where);
+
+    $dataFiltered = array_filter($listData, function ($data) use ($key, $value) {
+        return $data[$key] == $value;
+    });
+
+    if (count($dataFiltered) > 0) {
+        return reset($dataFiltered);
+    }
+
+    return [];
+}
