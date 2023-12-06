@@ -274,7 +274,7 @@ function dateIndo($format, $time = false)
  * @param string $method GET, POST, PUT, PATCH, DELETE
  * @param array $data
  * @param array $headers
- * @return string JSON-encoded
+ * @return array data
  */
 function fetchCURL($url, $method = 'GET', $data = null, $headers = array())
 {
@@ -303,7 +303,11 @@ function fetchCURL($url, $method = 'GET', $data = null, $headers = array())
     }
 
     if ($headers) {
-        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+        $header_strings = array_map(function ($key, $value) {
+            return "{$key}: {$value}";
+        }, array_keys($headers), $headers);
+
+        curl_setopt($curl, CURLOPT_HTTPHEADER, $header_strings);
     }
 
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -318,7 +322,7 @@ function fetchCURL($url, $method = 'GET', $data = null, $headers = array())
 
     curl_close($curl);
 
-    return $response;
+    return json_decode($response, true);
 }
 
 /**
