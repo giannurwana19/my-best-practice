@@ -698,3 +698,53 @@ function dateIndo(format, time) {
 const date = new Date(); // Tanggal dan waktu saat ini
 const formattedDate = dateIndo('d-M-Y H:i:s', date);
 console.log(formattedDate); // Contoh output: "Senin, 26 September 2023"
+
+/**
+ * Toastr helper
+ *
+ * css: https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css
+ *
+ * js: https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js
+ *
+ * @param string type [succes, info, warning, message]
+ * @param string title
+ * @param string message
+ *
+ */
+function toast(type, title, message) {
+  let options = {
+    closeButton: true,
+    debug: false,
+    newestOnTop: false,
+    progressBar: true,
+    positionClass: 'toast-top-right',
+    preventDuplicates: false,
+    onclick: null,
+    showDuration: '300',
+    hideDuration: '1000',
+    timeOut: '5000',
+    extendedTimeOut: '1000',
+    showEasing: 'swing',
+    hideEasing: 'linear',
+    showMethod: 'fadeIn',
+    hideMethod: 'fadeOut',
+  };
+
+  switch (type) {
+    case 'success':
+      toastr.success(message, title, options);
+      break;
+    case 'warning':
+      toastr.warning(message, title, options);
+      break;
+    case 'info':
+      toastr.info(message, title, options);
+      break;
+    case 'error':
+      toastr.error(message, title, options);
+      break;
+    default:
+      toastr.error(message, title, options);
+      break;
+  }
+}
