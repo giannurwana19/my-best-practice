@@ -700,13 +700,13 @@ const formattedDate = dateIndo('d-M-Y H:i:s', date);
 console.log(formattedDate); // Contoh output: "Senin, 26 September 2023"
 
 /**
- * Toastr helper
+ * Toastr by code seven
  *
  * css: https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css
  *
  * js: https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js
  *
- * @param string type [succes, info, warning, message]
+ * @param string type [success, info, warning, message]
  * @param string title
  * @param string message
  *
@@ -730,21 +730,5 @@ function toast(type, title, message) {
     hideMethod: 'fadeOut',
   };
 
-  switch (type) {
-    case 'success':
-      toastr.success(message, title, options);
-      break;
-    case 'warning':
-      toastr.warning(message, title, options);
-      break;
-    case 'info':
-      toastr.info(message, title, options);
-      break;
-    case 'error':
-      toastr.error(message, title, options);
-      break;
-    default:
-      toastr.error(message, title, options);
-      break;
-  }
+  toastr[type](message, title, options);
 }
