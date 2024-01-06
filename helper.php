@@ -288,7 +288,7 @@ function fetchCURL($url, $method = 'GET', $data = null, $headers = array())
         case 'POST':
             curl_setopt($curl, CURLOPT_POST, true);
             break;
-        case 'PUT':
+        case 'PUT':****
             curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'PUT');
             break;
         case 'DELETE':
