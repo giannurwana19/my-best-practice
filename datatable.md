@@ -22,6 +22,20 @@ var table = $('#tableData').DataTable({
     language: {
         emptyTable: "Tidak ada data yang ditemukan",
         loadingRecords: "Sedang memuat...",
+        search: "Cari:",
+        processing: 'Sedang memproses...',
+        lengthMenu: "Tampilkan _MENU_ data per halaman",
+        info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+        emptyTable: "Tidak ada data yang tersedia",
+        infoEmpty: "Menampilkan 0 sampai 0 dari 0 data",
+        zeroRecords: "Data tidak ditemukan",
+        infoFiltered: "(difilter dari _MAX_ total data)",
+        paginate: {
+            first: "Pertama",
+            last: "Terakhir",
+            next: "Selanjutnya",
+            previous: "Sebelumnya"
+        }
     },
     processing: true,
     serverSide: true,
