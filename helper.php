@@ -528,3 +528,26 @@ function filterArray(array $listData, array $where)
 
     return [];
 }
+
+/**
+ * generate random password
+ *
+ * @param integer $length
+ * @return string
+ */
+function generatePassword($length = 8)
+{
+    $length_random = $length - 2;
+    $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    $uppercaseLetter = $characters[rand(0, 25)];
+    $otherCharacters = '';
+    for ($i = 0; $i < $length_random; $i++) {
+        $otherCharacters .= $characters[rand(0, 61)];
+    }
+
+    $numericCharacter = $characters[rand(52, 61)];
+    $password = $uppercaseLetter . $otherCharacters . $numericCharacter;
+    $password = str_shuffle($password);
+
+    return $password;
+}

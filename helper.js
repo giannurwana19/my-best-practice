@@ -732,3 +732,36 @@ function toast(type, title, message) {
 
   toastr[type](message, title, options);
 }
+
+/**
+ *
+ * @param length
+ * @returns string random_password
+ */
+function generatePassword(length = 8) {
+  const characters =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const lengthRandom = length - 2;
+
+  const uppercaseLetter = characters.charAt(Math.floor(Math.random() * 26));
+
+  let otherCharacters = '';
+  for (let i = 0; i < lengthRandom; i++) {
+    otherCharacters += characters.charAt(Math.floor(Math.random() * 62));
+  }
+
+  const numericCharacter = characters.charAt(
+    Math.floor(Math.random() * 10) + 52
+  );
+
+  let password = uppercaseLetter + otherCharacters + numericCharacter;
+
+  password = password
+    .split('')
+    .sort(function () {
+      return 0.5 - Math.random();
+    })
+    .join('');
+
+  return password;
+}
